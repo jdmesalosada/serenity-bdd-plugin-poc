@@ -1,13 +1,19 @@
+
 plugins {
     id "net.serenity-bdd.serenity-gradle-plugin" version "3.2.0"
     id 'java'
     id 'eclipse'
     id 'idea'
+    id "java-gradle-plugin"
+    id "com.gradle.plugin-publish" version "0.15.0"
+    id 'maven-publish'
+    id 'com.jmconsultant.juliana' version '0.0.1-SNAPSHOT'
 }
 
-defaultTasks 'clean','test','aggregate'
+defaultTasks 'clean', 'test', 'aggregate'
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -23,15 +29,20 @@ ext {
 }
 
 dependencies {
+
     testImplementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}",
-                "net.serenity-bdd:serenity-junit5:${serenityCoreVersion}",
-                "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}",
-                "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}",
-                "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}",
-                "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
-                "org.assertj:assertj-core:${assertJVersion}",
-                "ch.qos.logback:logback-classic:${logbackVersion}"
+            "net.serenity-bdd:serenity-junit5:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}",
+            "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
+            "org.assertj:assertj-core:${assertJVersion}",
+            "ch.qos.logback:logback-classic:${logbackVersion}"
+
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    implementation "com.googlecode.json-simple:json-simple:1.1.1"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+
 }
 
 test {
